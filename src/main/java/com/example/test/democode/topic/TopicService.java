@@ -1,0 +1,66 @@
+package com.example.test.democode.topic;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TopicService {
+	
+	List<Topic> topics = new ArrayList<>(Arrays.asList(
+			new Topic("1", "Terraform", "Cookbook on Terraform"),
+			new Topic("2", "Spring MVC", "Cookbook on Spring MVC"),
+			new Topic("3", "CHEF", "CHEF cookbook"),
+			new Topic("4", "Kotlin", "Overview of Kotlin"),
+			new Topic("4","Kotlin-2","Kotlin Latest")));
+	
+	
+	public List<Topic> getAllWithOneId(String id) {
+		List<Topic> tlist = new ArrayList<>();
+		for(int i=0;i<topics.size();i++) {
+			Topic t = topics.get(i);
+			if(t.getId().equals(id)) {
+				tlist.add(t);
+			}
+		}
+		return tlist;
+	}
+	
+	public List<Topic> getAllTopics() {
+		return topics;
+	}
+	
+	public Topic getTopic(String id) {
+	//	return topics.stream().filter(t->t.getId().equals(id)).findFirst().get();
+		for (Topic topic : topics) {
+			if(topic.getId().equals(id)) {
+				return topic;
+			}
+		}
+		return null;
+	}
+	
+	public void addTopic(Topic topic) {
+		topics.add(topic);
+	}
+
+	public void updateTopic(String id, Topic topic) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < topics.size(); i++) {
+			Topic t = topics.get(i);
+			if(t.getId().equals(id)) {
+				topics.set(i, topic);
+				return;
+			}
+		}
+		
+	}
+
+	public void deleteTopic(String id) {
+		topics.removeIf(t->t.getId().equals(id));
+		
+	}
+
+}
