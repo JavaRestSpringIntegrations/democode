@@ -3,6 +3,7 @@ package com.example.test.democode.topic;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +38,11 @@ public class TopicController {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/topics")
 	//tells spring that your request will have a json payload and convert it into Topic instances POJO when this URL is mapped
-	public void addTopic(@RequestBody Topic topic) {
-		topicService.addTopic(topic);
+	public boolean addTopic(@RequestBody Topic topic) {
+		return topicService.addTopic(topic);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT,value="/topics/{id}")
+	@RequestMapping(method=RequestMethod.PUT,value="/topics/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
 	//tells spring that your request will have a json payload and convert it into Topic instances POJO when this URL is mapped
 	public void addTopic(@RequestBody Topic topic,@PathVariable String id) {
 		topicService.updateTopic(id,topic);

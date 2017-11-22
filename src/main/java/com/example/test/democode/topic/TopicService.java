@@ -42,8 +42,31 @@ public class TopicService {
 		return null;
 	}
 	
-	public void addTopic(Topic topic) {
-		topics.add(topic);
+	public boolean addTopic(Topic topic) {
+		int set = 1;
+		System.out.println("->" +topic.toString());
+		for(int i=0;i<topics.size();i++) {
+			//Topic t = topics.get(i);
+			//if(t.getId().equals(topic.getId()))
+			//System.out.println(t.toString());
+			//if(topics.get(i).toString().equals(topic.toString()))	
+			if(topics.get(i).equals(topic))
+			{
+				System.out.println("Already Existing");
+				//System.out.println(t.toString());
+				set =0;
+				return false;
+			}
+			
+		}
+		
+	
+		if(set!=0) {
+			
+			topics.add(topic);
+		}
+		return true;
+		
 	}
 
 	public void updateTopic(String id, Topic topic) {
